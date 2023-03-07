@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 Марта</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Jost;
+        }
+
+        .container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e80202;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #e80202;
+            transform: rotate(45deg);
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .heart::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #e80202;
+            border-radius: 50%;
+            box-shadow: 0 -20px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .heart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: #e80202;
+            border-radius: 50%;
+            box-shadow: -20px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            position: static;
+            text-align: center;
+            font-size: 1.2em;
+            color: white;
+        }
+    </style>
+
+    <div class="container">
+        <div class="heart"></div>
+        <h2>Это из ряда вон [выходящее] анти-форматное цифровое поздравление "8 марта". С праздником, чувихи</h2>
+    </div>
+
+
+    <script src="anime.min.js"></script>
+    <script>
+        const container = document.querySelector('.container');
+        for (var i = 1; i <= 50; i ++){
+            const hearts = document.createElement('div');
+            hearts.classList.add('heart');
+            container.appendChild(hearts);
+        }
+
+        function animateHearts() {
+            anime({
+                targets: '.heart',
+                translateX: function() {
+                    return anime.random(-700, 700);
+                },
+
+                translateY: function() {
+                    return anime.random(-500, 500);
+                },
+                rotate: 45,
+                scale: function() {
+                    return anime.random(1, 5);
+                },
+
+                easing: 'easeInOutBack',
+                duration: 3000,
+                delay: anime.stagger(10),
+                complete: animateHearts,
+                content: 'Это из ряда вон [выходящее] анти-форматное цифровое поздравление "8 марта". С праздником, чувихи'
+            })
+        }
+        animateHearts("")
+    </script>
+</body>
+</html>
